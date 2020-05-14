@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Header, Button } from 'semantic-ui-react';
-
+import { connect } from "react-redux";
+import { increment } from "../../actions/counter";
 
 
 
@@ -33,4 +34,9 @@ class Counter extends Component {
     );
   }
 }
-export default Counter;
+
+function mapStateToProps(state){
+  return { counter: state.counter };
+};
+
+export default connect(mapStateToProps, { increment })(Counter);
