@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List,Message } from 'semantic-ui-react';
+import { List,Message,Header } from 'semantic-ui-react';
 import { connect } from "react-redux";
 
 import { getAllTodos } from "./../../actions/todos";
@@ -18,7 +18,20 @@ class AllTodosList extends Component {
   
 
   renderList = () => {
-    
+    if(this.props.allTodos.length === 0){
+      return <Header content="No Todos Yet"/>
+    } else {
+      return this.props.allTodos.map(({_id, text, dateCreated }) => {
+        return(
+          <List.Item key={_id}>
+            <List.Content>
+              <List.Header>{text}</List.Header>
+              <List.Description>{moment(dateCreated).fromNow()}</List.Description>
+            </List.Content>
+          </List.Item>
+        )
+      })
+    }
   }
 
   render() {
@@ -26,12 +39,7 @@ class AllTodosList extends Component {
     return (
       <List celled selection size='huge'>
         { this.props.getAllTodosError ? <Message negative header={this.props.getAllTodosError}/> : null }
-        <List.Item>
-          <List.Content>
-            <List.Header>Some future todo</List.Header>
-            <List.Description>Created: {moment().fromNow()}</List.Description>
-          </List.Content>
-        </List.Item>
+        { this.renderList() }
       </List>
     );
   }
