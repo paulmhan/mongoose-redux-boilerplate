@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List } from 'semantic-ui-react';
+import { List,Message } from 'semantic-ui-react';
 import { connect } from "react-redux";
 
 import { getAllTodos } from "./../../actions/todos";
@@ -16,9 +16,16 @@ class AllTodosList extends Component {
     this.props.getAllTodos();
   }
   
+
+  renderList = () => {
+    
+  }
+
   render() {
+    console.log(this.props);
     return (
       <List celled selection size='huge'>
+        { this.props.getAllTodosError ? <Message negative header={this.props.getAllTodosError}/> : null }
         <List.Item>
           <List.Content>
             <List.Header>Some future todo</List.Header>
