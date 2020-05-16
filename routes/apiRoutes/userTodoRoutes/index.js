@@ -12,12 +12,10 @@ const { requireAuth } = require('../../../middlewares/authMiddlewares');
 router.get('/emails', getAllUserEmails);
 
 // /api/user/todos
-
-
 router.route('/todos')
   .get(requireAuth, getUserTodos);
-// /api/user/emails
 
+// /api/user/emails
 router.route('/todos/:todoId')
   .delete(requireAuth, deleteUserTodoById)
   .put(requireAuth, updateTodoById);
